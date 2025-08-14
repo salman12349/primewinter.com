@@ -81,8 +81,7 @@
   height: auto;
 }
 </style>
-<h> আমার সরব প্রথম ওয়েবসাইট তৈরি করা।<h>
-  <mail-to: smartservic23@gmail.com;>
+
 
   <h2 class="fruit-heading">কিছু ফলের নাম</h2>
 
@@ -122,6 +121,22 @@
 <img src="/storage/emulated/0/Pictures/img1.jpg" width="360" height="auto" alt="আপনার ছবির বর্ণনা">
   
      <a href="https://m.youtube.com/watch?v=1B6DI_o-9G8&pp=0gcJCdgAo7VqN5tD" alt="">(CLICK HERE) alan walkar song <ul> <li> OPEN With CHROME BROWSER ব্রাউজারের মাধ্যমে খুলুন</li> </ul> </a>
+<textarea id="textInput" rows="10" cols="50">এখানে আপনার লেখা লিখুন।</textarea><br>
+<button onclick="speakText()">শুনুন</button>
 
+<script>
+function speakText() {
+  const text = document.getElementById('textInput').value;
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    // ঐচ্ছিক: ভাষার সেটিং (যেমন: 'bn-BD' বাংলার জন্য)
+    // utterance.lang = 'en-US'; // ইংরেজীর জন্য
+    // utterance.lang = 'bn-BD'; // বাংলা (যদি ব্রাউজার সাপোর্ট করে)
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert('দুঃখিত, আপনার ব্রাউজার টেক্সট-টু-স্পিচ সাপোর্ট করে না।');
+  }
+}
+</script>
 </body>
 </html>
