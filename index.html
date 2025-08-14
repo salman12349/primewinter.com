@@ -1,142 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash & Room Rental Services</title>
+    <style>
+        /* Base styles for dark mode */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background */
+            color: #e0e0e0; /* Light text for dark background */
+            line-height: 1.6;
+        }
+        .container {
+            width: 95%; /* Wider on mobile */
+            max-width: 1000px;
+            margin: 20px auto; /* Reduced margin for mobile */
+            background-color: #2c2c2c; /* Slightly lighter dark for container */
+            padding: 20px; /* Reduced padding for mobile */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Darker shadow */
+            border-radius: 12px;
+        }
+        h1, h2 {
+            color: #66b3ff; /* Lighter blue for headings in dark mode */
+            text-align: center;
+            margin-bottom: 20px; /* Adjusted margin */
+            font-weight: 700;
+        }
+        p, li {
+            color: #cccccc; /* General text color */
+        }
 
-  <style>
-    p {
-      color: #00f0ff;
-      background-color: green; 
-    }
-    h2 {
-      color: green; 
-      background-color: brown;
-    }
-    .inline-paragraph {
-      color: #0ff066;
-      background-color: #0044ff;
-    }
-    .fruit-heading {
-      background-color: #ffffff;
-    }
-  </style>
+        /* Main Service Cards */
+        .main-heading {
+            display: flex;
+            flex-direction: column; /* Stack vertically on mobile */
+            gap: 20px; /* Space between cards */
+            margin-bottom: 30px; /* Adjusted margin */
+        }
+        .service-card {
+            background-color: #3a3a3a; /* Darker card background */
+            border: 1px solid #4f4f4f; /* Subtle border */
+            border-radius: 10px;
+            padding: 20px; /* Adjusted padding */
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-3px); /* Less dramatic lift for mobile */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .service-card h2 {
+            margin-top: 0;
+            margin-bottom: 10px; /* Adjusted margin */
+            font-size: 1.5em; /* Smaller font for mobile headings */
+            color: #88ccff; /* Lighter blue for card headings */
+        }
+        .service-card button {
+            background-color: #007bff; /* Vibrant blue button */
+            color: #fff;
+            border: none;
+            padding: 10px 20px; /* Adjusted padding */
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em; /* Adjusted font size */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+            width: 100%; /* Full width button on mobile */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .service-card button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        /* Detailed Service Sections */
+        .service-section {
+            display: none; /* Initially hidden */
+            margin-top: 30px; /* Adjusted margin */
+            padding: 25px; /* Adjusted padding */
+            border: 1px solid #4f4f4f;
+            border-radius: 10px;
+            background-color: #3a3a3a; /* Same as card background */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .service-section h2 {
+            margin-top: 0;
+            color: #88ccff;
+            font-size: 1.8em; /* Adjusted font size */
+            margin-bottom: 15px;
+        }
+        .service-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .service-section ul li {
+            background-color: #4a4a4a; /* Slightly lighter background for list items */
+            margin-bottom: 8px; /* Reduced margin */
+            padding: 10px 15px; /* Adjusted padding */
+            border-left: 5px solid #007bff; /* Blue border on the left */
+            border-radius: 5px;
+            color: #e0e0e0; /* List item text color */
+        }
+
+        /* Contact Information */
+        .contact-info {
+            margin-top: 40px; /* Adjusted margin */
+            padding: 25px; /* Adjusted padding */
+            border-top: 1px solid #4f4f4f;
+            text-align: center;
+            background-color: #3a3a3a;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .contact-info h2 {
+            color: #88ccff;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        .contact-item {
+            margin-bottom: 10px; /* Reduced margin */
+        }
+        .contact-item p {
+            margin: 5px 0;
+            font-size: 1em; /* Adjusted font size */
+            color: #cccccc;
+        }
+        .contact-item a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .contact-item a:hover {
+            color: #66b3ff;
+            text-decoration: underline;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: sticky; /* Make it sticky */
+            top: 0; /* Stick to the top */
+            width: 100%;
+            background-color: #1a1a1a; /* Same as body background */
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .language-selector select {
+            padding: 8px 12px; /* Adjusted padding */
+            border-radius: 8px;
+            border: 1px solid #66b3ff; /* Blue border */
+            background-color: #3a3a3a; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2366b3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-5.4H18.2c-4.1%200-7.9%201.5-10.9%204.5c-3%203-4.5%206.8-4.5%2010.9s1.5%207.9%204.5%2010.9l128%20128c3%203%206.8%204.5%2010.9%204.5s7.9-1.5%2010.9-4.5l128-128c3-3%204.5-6.8%204.5-10.9s-1.5-7.9-4.5-10.9z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 10px;
+        }
+
+        /* Specific styles for Arabic text direction */
+        [lang="ar"] body {
+            direction: rtl;
+            text-align: right;
+        }
+        [lang="ar"] .service-section ul li {
+            border-left: none;
+            border-right: 5px solid #007bff;
+        }
+        [lang="ar"] .language-selector select {
+            background-position: left 8px center; /* Flip arrow for RTL */
+            padding: 8px 12px; /* Re-adjust padding */
+        }
+    </style>
 </head>
 <body>
+    <div class="language-selector">
+        <label for="language-select" class="sr-only">Select Language</label>
+        <select id="language-select" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="bn">বাংলা</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    
+    
 
-  <h2>SIMPLE PARAGRAPH MENU</h2>
-  <p>Paragraph</p>
-  <p>Paragraph item 1</p>
+    <div class="container">
+        <h1 data-en="Our Services" data-bn="আমাদের সার্ভিসসমূহ" data-hi="हमारी सेवाएं" data-ar="خدماتنا">Our Services</h1>
+        
+        
+        
+        <div class="main-heading">
+            <div class="service-card">
+             
+             
+                <h2 data-en="Car Wash Service" data-bn="গাড়ি ধোওয়া সার্ভিস" data-hi="कार धोने की सेवा" data-ar="خدمة غسيل السيارات">Car Wash Service</h2>
+                
+                
+                <button onclick="showService('carWash')" 
+                        data-en="Click for details" 
+                        data-bn="বিস্তারিত জানতে ক্লিক করুন" 
+                        data-hi="विवरण के लिए क्लिक करें" 
+                        data-ar="انقر للتفاصيل">Click for details</button>
+            </div>
+            <div class="service-card">
+                <h2 data-en="Room and Bed Rental" data-bn="রুম এবং বিছানা ভাড়া" data-hi="कमरा और बिस्तर किराए पर" data-ar="تأجير الغرف والأسرة">Room and Bed Rental</h2>
+                <button onclick="showService('roomRent')" 
+                        data-en="Click for details" 
+                        data-bn="বিস্তারিত জানতে ক্লিক করুন" 
+                        data-hi="विवरण के लिए क्लिक करें" 
+                        data-ar="انقر للتفاصيل">Click for details</button>
+            </div>
+        </div>
 
-  <p class="inline-paragraph">In line css paragraph</p>
+        <div id="carWashService" class="service-section">
+          
+          
+            <h2 data-en="Car Wash Service" data-bn="গাড়ি ধোওয়া সার্ভিস" data-hi="कार धोने की सेवा" data-ar="خدمة غسيل السيارات">Car Wash Service</h2>
+            
+            
+            <p data-en="Welcome! We provide the best car wash service for your vehicle." 
+               data-bn="স্বাগতম! আমরা আপনার গাড়ির জন্য সেরা ধোওয়া সার্ভিস সরবরাহ করি।" 
+               data-hi="स्वागत है! हम आपके वाहन के लिए सबसे अच्छी कार धोने की सेवा प्रदान करते हैं।" 
+               data-ar="أهلاً بك! نحن نقدم أفضل خدمة غسيل سيارات لمركبتك.">Welcome! We provide the best car wash service for your vehicle.</p>
+               
+               
+            <ul>
+                <li data-en="One-time car wash cost: **15 AED**." 
+                    data-bn="একবারে গাড়ি ধোয়ার খরচ মাত্র **১৫ দিরহাম**।" 
+                    data-hi="एक बार कार धोने का खर्च: **15 दिरहम**।" 
+                    data-ar="تكلفة غسيل السيارة لمرة واحدة: **15 درهم**."
+                >One-time car wash cost: **15 AED**.</li>
+                <li data-en="Monthly, three days a week car wash for **small cars: 120 AED**." 
+                    data-bn="মাসিক ভিত্তিতে, সপ্তাহে তিন দিন গাড়ি ধোয়ার জন্য **ছোট গাড়ির ক্ষেত্রে ১২০ দিরহাম**।" 
+                    data-hi="मासिक, सप्ताह में तीन दिन छोटी कारों के लिए कार धोने का खर्च: **120 दिरहम**।" 
+                    data-ar="غسيل سيارات شهري، ثلاثة أيام في الأسبوع للسيارات الصغيرة: **120 درهم**."
+                >Monthly, three days a week car wash for **small cars: 120 AED**.</li>
+                <li data-en="Monthly, three days a week car wash for **medium cars: 150 AED**." 
+                    data-bn="মাসিক ভিত্তিতে, সপ্তাহে তিন দিন গাড়ি ধোয়ার জন্য **মাঝারি গাড়ির জন্য ১৫০ দিরহাম**।" 
+                    data-hi="मासिक, सप्ताह में तीन दिन मध्यम कारों के लिए कार धोने का खर्च: **150 दिरहम**।" 
+                    data-ar="غسيل سيارات شهري، ثلاثة أيام في الأسبوع للسيارات المتوسطة: **150 درهم**."
+                >Monthly, three days a week car wash for **medium cars: 150 AED**.</li>
+            </ul>
+            
+            
+            <p data-en="Contact us today to keep your car sparkling clean!" 
+               data-bn="আপনার গাড়িকে ঝকঝকে রাখতে আজই আমাদের সাথে যোগাযোগ করুন!" 
+               data-hi="अपनी कार को चमकदार साफ रखने के लिए आज ही हमसे संपर्क करें!" 
+               data-ar="تواصل معنا اليوم للحفاظ على سيارتك نظيفة ولامعة!">Contact us today to keep your car sparkling clean!</p>
+        </div>
+        
+        
 
+        <div id="roomRentService" class="service-section">
+            <h2 data-en="Room and Bed Rental" data-bn="রুম এবং বিছানা ভাড়া" data-hi="कमरा और बिस्तर किराए पर" data-ar="تأجير الغرف والأسرة">Room and Bed Rental</h2>
+            
+            
+            <p data-en="We offer monthly bed and room rentals." 
+               data-bn="আমাদের এখানে মাসিক ভিত্তিতে বিছানা এবং রুম ভাড়া দেওয়া হয়।" 
+               data-hi="हम मासिक आधार पर बिस्तर और कमरे किराए पर देते हैं।" 
+               data-ar="نحن نقدم خدمة تأجير الأسرّة والغرف شهريًا.">We offer monthly bed and room rentals.</p>
+               
+               
+               
+            <ul>
+                <li data-en="If you are looking for a comfortable and affordable place to stay, our various sized rooms and beds may be perfect for you." 
+                    data-bn="আপনি যদি একটি আরামদায়ক এবং সাশ্রয়ী থাকার জায়গা খুঁজছেন, তবে আমাদের বিভিন্ন আকারের রুম এবং বিছানা আপনার জন্য উপযুক্ত হতে পারে।" 
+                    data-hi="यदि आप रहने के लिए एक आरामदायक और किफायती जगह की तलाश में हैं, तो हमारे विभिन्न आकार के कमरे और बिस्तर आपके लिए एकदम सही हो सकते हैं।" 
+                    data-ar="إذا كنت تبحث عن مكان مريح وبأسعار معقولة للإقامة، فقد تكون غرفنا وأسرتنا ذات الأحجام المختلفة مثالية لك.">If you are looking for a comfortable and affordable place to stay, our various sized rooms and beds may be perfect for you.</li>
+                <li data-en="Comfortable living experience in a clean and safe environment." 
+                    data-bn="পরিষ্কার-পরিচ্ছন্ন এবং নিরাপদ পরিবেশে আরামদায়ক থাকার অভিজ্ঞতা।" 
+                    data-hi="एक स्वच्छ और सुरक्षित वातावरण में आरामदायक रहने का अनुभव।" 
+                    data-ar="تجربة إقامة مريحة في بيئة نظيفة وآمنة.">Comfortable living experience in a clean and safe environment.</li>
+                    
+                <li data-en="Options for single or shared rooms available." 
+                    data-bn="একক বা শেয়ার্ড রুমের বিকল্প উপলব্ধ।" 
+                    data-hi="एकल या साझा कमरों के विकल्प उपलब्ध हैं।" 
+                    data-ar="خيارات الغرف الفردية أو المشتركة متاحة.">Options for single or shared rooms available.</li>
+                    
+                    <li data-en="Al barsha height." 
+                    data-bn="আল বারশা উচ্চতা।" 
+                    data-hi="अल बरशा ऊंचाई." 
+                    data-ar="ارتفاع البرشاء.>Al barsha height.</li>
+            </ul>
+            
+            
+       
+            <div class="contact-item">
+                <p data-en="**Address:**" data-bn="**ঠিকানা:**" data-hi="**पता:**" data-ar="**العنوان:**">**Address:** <span data-en="[Your Building/Street], [Area], [City], [Country]" data-bn="[আপনার ভবন/রাস্তা], [এলাকা], [শহর], [দেশ]" data-hi="[आपका भवन/सड़क], [क्षेत्र], [शहर], [देश]" data-ar="[المبنى/الشارع الخاص بك]، [المنطقة]، [المدينة]، [الدولة]">[Your Building/Street], [Area], [City], [Country]</span></p>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+            <div class="contact-info">
+            <h2>CONTACT US</h2>
+            <p>"Feel free to contact us for any inquiries:"</p>
+            <p><strong>Phone:</strong> <a href="tel:+971 54520-9013">+971 54520-9023</a></p>
+            <p><strong>Email:</strong> <a href="mailto: smartservic24@gmail.com.com">smartservic24@gmail.com</a></p>
+            <p><strong>Address:</strong> [Al Barsha height], [Dubai], [United Arab Emirates]</p>
+        </div>
+    </div>
+    
+    
 
-  <h2>HOME MENU</h2>
-  <!DOCTYPE html>
-<html>
-<head>
-  <title>মেনু আইকন</title>
-  <style>
-    .menu-icon {
-      display: inline-block;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 10px;
-    }
+    <script>
+        // Language specific strings for buttons and other dynamic texts
+        const buttonTexts = {
+            'en': 'Click for details',
+            'bn': 'বিস্তারিত জানতে ক্লিক করুন',
+            'hi': 'विवरण के लिए क्लिक करें',
+            'ar': 'انقر للتفاصيل'
+        };
 
-    .menu-icon span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #333;
-      margin: 5px auto;
-      transition: background-color 0.3s ease;
-    }
+        // Function to show/hide service sections and scroll to them
+        function showService(serviceId) {
+            var sections = document.getElementsByClassName('service-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            var selectedService = document.getElementById(serviceId + 'Service');
+            if (selectedService) {
+                selectedService.style.display = 'block';
+                // Scroll to the displayed section for better UX on mobile
+                selectedService.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
 
-    .menu-icon:hover span {
-      background-color: #555;
-    }
-  </style>
-</head>
-<body>
+        // Language translation function
+        function setLanguage(lang) {
+            document.documentElement.lang = lang; // Set HTML lang attribute
 
-  <button class="menu-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+            var elements = document.querySelectorAll('[data-en], [data-bn], [data-hi], [data-ar]');
+            elements.forEach(function(el) {
+                if (el.dataset[lang]) {
+                    // Check if it's a link in contact-item, then update its text content (not href)
+                    if (el.tagName === 'A' && el.closest('.contact-item')) {
+                        el.textContent = el.dataset[lang];
+                    } else {
+                        el.textContent = el.dataset[lang];
+                    }
+                }
+            });
 
-</body>
-</html>
-<link rel="stylesheet" href="Tts.html">
-  
-  <img src="/storage/emulated/0/Pictures/Logo.jpg" class="my-image" alt="আপনার ছবির বর্ণনা">
+            // Update button texts specifically
+            document.querySelectorAll('.service-card button').forEach(button => {
+                button.textContent = buttonTexts[lang];
+            });
 
-<style>
-.my-image {
-  width: 360px;
-  height: auto;
-}
-</style>
+            // Handle specific direction for Arabic
+            if (lang === 'ar') {
+                document.body.style.direction = 'rtl';
+                document.body.style.textAlign = 'right';
+            } else {
+                document.body.style.direction = 'ltr';
+                document.body.style.textAlign = 'left';
+            }
+        }
 
-
-  <h2 class="fruit-heading">কিছু ফলের নাম</h2>
-
-  <ul>
-    <li>আপেল</li>
-    <li>কলা</li>
-    <li>কমলা</li>
-    <li>পেয়ারা</li>
-  </ul>
-
-  <h2>কিছু রঙের নাম</h2>
-
-  <ol>
-    <li>লাল</li>
-    <li>সবুজ</li>
-    <li>নীল</li>
-    <li>Red</li>
-  </ol>
-
-  <p>(ক) চারটি ভালো ফলের নাম?</p>
-  <ol>
-    <li>আপেল</li>
-    <li>আম</li>
-    <li>কমলা</li>
-    <li>জাম</li>
-  </ol>
-
-  <p>(খ) চারটি ভালো ফলের নাম</p>
-  <ol>
-    <li>লিচু</li>
-    <li>কাঠাল</li>
-    <li>কলা</li>
-    <li>জাম</li>
-  </ol>
-   <img src="/storage/emulated/0/Pictures/Logo.jpg" class="my-image" alt="আপনার ছবির বর্ণনা">
-  <p>আমার একটা নতুন ছবি</p>
-<img src="/storage/emulated/0/Pictures/img1.jpg" width="360" height="auto" alt="আপনার ছবির বর্ণনা">
-  
-     <a href="https://m.youtube.com/watch?v=1B6DI_o-9G8&pp=0gcJCdgAo7VqN5tD" alt="">(CLICK HERE) alan walkar song <ul> <li> OPEN With CHROME BROWSER ব্রাউজারের মাধ্যমে খুলুন</li> </ul> </a>
-<textarea id="textInput" rows="10" cols="50">এখানে আপনার লেখা লিখুন।</textarea><br>
-<button onclick="speakText()">শুনুন</button>
-
-<script>
-function speakText() {
-  const text = document.getElementById('textInput').value;
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    // ঐচ্ছিক: ভাষার সেটিং (যেমন: 'bn-BD' বাংলার জন্য)
-    // utterance.lang = 'en-US'; // ইংরেজীর জন্য
-    // utterance.lang = 'bn-BD'; // বাংলা (যদি ব্রাউজার সাপোর্ট করে)
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert('দুঃখিত, আপনার ব্রাউজার টেক্সট-টু-স্পিচ সাপোর্ট করে না।');
-  }
-}
-</script>
+        // Set default language to English on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setLanguage('en');
+            // Ensure the language selector reflects the default
+            document.getElementById('language-select').value = 'en';
+        });
+    </script>
 </body>
 </html>
