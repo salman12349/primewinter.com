@@ -1,1 +1,1 @@
-https://primewinter.com
+primewinter.com
