@@ -3,255 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইসলামী ব্যাংক মেনু</title>
+    <title>Hamburger Menu</title>
     <style>
+        /* Basic styles line13: Breck ground color cyan*/
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
+            padding: 0;
+            background-color: Cyan;
         }
 
-        .menu-container {
-            background-color: #27ae60; /* ইসলামী ব্যাংকের সবুজ রঙ */
+        /* Header and menu button styles */
+        .header {
+            background-color: DarkBlue;
             color: white;
-            padding: 15px;
-            width: 300px; /* মেনুর আনুমানিক প্রস্থ */
-        }
-
-        .menu-header {
+            padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .close-icon {
-            font-size: 24px;
+        .menu-button {
+            background: none;
+            border: none;
             cursor: pointer;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .main-menu {
+        .menu-button .bar {
+            width: 25px;
+            height: 3px;
+            background-color: Chartreuse;
+            transition: all 0.3s ease;
+        }
+
+        /* Menu styles */
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -250px; /* Initially hidden */
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-menu.open {
+            right: 0; /* Visible when open */
+        }
+
+        .sidebar-menu ul {
             list-style: none;
             padding: 0;
-            margin-top: 15px;
-        }
-
-        .main-menu > li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .main-menu > li:last-child {
-            border-bottom: none;
-        }
-
-        .main-menu > li > a {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-        }
-
-        .dropdown-arrow {
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .submenu {
-            list-style: none;
-            padding-left: 15px;
             margin: 0;
-            display: none; /* প্রাথমিকভাবে লুকানো */
-            background-color: rgba(0, 0, 0, 0.1);
         }
 
-        .submenu li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .submenu li:last-child {
-            border-bottom: none;
-        }
-
-        .submenu li a {
-            color: white;
+ /* লিস্টিং আইটেম কালার পিংক */
+        .sidebar-menu ul li a {
+            display: block;
+            padding: 15px 20px;
             text-decoration: none;
-            display: block;
-        }
+            color: Fuchsia;
+            border-bottom: 1px solid #444;
+            transition: background-color 0.2s ease;
+        } /* লিস্টিং ক্লিক করলে কালার চেঞ্জ হয়  */
 
-        .submenu.active {
-            display: block;
-        }
-
-        .back-arrow {
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .card-item a {
-            display: flex;
-            align-items: center;
-        }
-
-        .card-item img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .contact-info {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9em;
-        }
-
-        .contact-info h3 {
-            margin-top: 0;
+        .sidebar-menu ul li a:hover {
+            background-color: Chartreuse;
+            color: red;
         }
     </style>
 </head>
 <body>
 
-    <div class="menu-container">
-        <div class="menu-header">
-            <div class="logo">ইসলামী ব্যাংক</div>
-            <span class="close-icon">&times;</span>
-        </div>
+    <header class="header">
+        <button class="menu-button" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
 
-        <ul class="main-menu">
-            <li><a href="#">HOME</a></li>
-            <li>
-                <a href="#">ABOUT IBPPLC <span class="dropdown-arrow">&#9660;</span></a>
-                <ul class="submenu">
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Company</a></li>
-                    <li><a href="#">IBBL At A Glance</a></li>
-                    <li><a href="#">Corporate Information</a></li>
-                    <li><a href="#">Sponsors</a></li>
-                    <li><a href="#">Placement Holders</a></li>
-                    <li><a href="#">Milestone Of IBBL</a></li>
-                    <li><a href="#">Our Achievement</a></li>
-                    <li><a href="#">Awards</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Organizational Structure</a></li>
-                    <li><a href="#">Board of Directors</a></li>
-                    <li><a href="#">Shari'ah Supervisory Council</a></li>
-                    <li><a href="#">Executive Committee</a></li>
-                    <li><a href="#">Audit Committee</a></li>
-                    <li><a href="#">Risk Management Committee</a></li>
-                    <li><a href="#">Management Committee</a></li>
-                    <li><a href="#">Organization Structure</a></li>
-                    <li><a href="#">Code Of Conduct Of Board Of Directors</a></li>
-                    <li><a href="#">Others</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">DEPOSIT <span class="dropdown-arrow">&#9660;</span></a>
-                <ul class="submenu">
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Deposit Products</a></li>
-                    <li><a href="#">Overview</a></li>
-                    <li><a href="#">Al-Wadeeah Current Account</a></li>
-                    <li><a href="#">Al-Wadeeah Personal Retail Account</a></li>
-                    <li><a href="#">Mudaraba Special Notice Account (MSNA)</a></li>
-                    <li><a href="#">Mudaraba Payroll Account</a></li>
-                    <li><a href="#">Mudaraba Waqf Cash Deposit Account (MWCDA)</a></li>
-                    <li><a href="#">Mudaraba Upohar Deposit</a></li>
-                    <li><a href="#">Mudaraba Priority Savings Account</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Savings Accounts</a></li>
-                    <li><a href="#">Mudaraba Savings Account (MSA)</a></li>
-                    <li><a href="#">Students Mudaraba Savings Account (SMSA)</a></li>
-                    <li><a href="#">Mudaraba Farmers Savings Account (MFSA)</a></li>
-                    <li><a href="#">Mudaraba Industrial Employees Savings</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">INVESTMENT <span class="dropdown-arrow">&#9660;</span></a>
-                <ul class="submenu">
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Overview</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Modes of Investment</a></li>
-                    <li><a href="#">BAI-MODES</a></li>
-                    <li><a href="#">Bai-Murabaha</a></li>
-                    <li><a href="#">Bai-Muajjal</a></li>
-                    <li><a href="#">Bai-Istijrar</a></li>
-                    <li><a href="#">Bai-Salam</a></li>
-                    <li><a href="#">Bai-Istisna'a</a></li>
-                    <li><a href="#">Bai-As-Sarf</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> SHARE-MODES</a></li>
-                    <li><a href="#">Mudaraba</a></li>
-                    <li><a href="#">Musharaka</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> IJARA-MODES</a></li>
-                    <li><a href="#">Hire Purchase Under Shirkatul Meelk</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> SME Investment</a></li>
-                    <li><a href="#">SME Investment</a></li>
-                    <li><a href="#">Microfinance</a></li>
-                    <li><a href="#"><span class="back-arrow">&lt;</span> Retail & Consumer Schemes</a></li>
-                </ul>
-            </li>
-            <li><a href="#">FOREIGN EXCHANGE</a></li>
-            <li>
-                <a href="#">CARD <span class="dropdown-arrow">&#9660;</span></a>
-                <ul class="submenu">
-                    <li><a href="#" class="card-item"><img src="placeholder_card_icon.png" alt="Credit Cards"> Credit Cards</a></li>
-                    <li><a href="#" class="card-item"><img src="placeholder_card_icon.png" alt="Debit Cards"> Debit Cards</a></li>
-                    <li><a href="#" class="card-item"><img src="placeholder_card_icon.png" alt="Prepaid Card"> Prepaid Card</a></li>
-                    <li><a href="#" class="card-item"><img src="placeholder_offers_icon.png" alt="Offers"> Offers</a></li>
-                </ul>
-            </li>
-            <li><a href="#">SERVICES <span class="dropdown-arrow">&#9660;</span></a></li>
-            <li><a href="#">DIGITAL BANKING <span class="dropdown-arrow">&#9660;</span></a></li>
-            <li><a href="#">MEDIA ROOM</a></li>
-            <li><a href="#">LOCATION <span class="dropdown-arrow">&#9660;</span></a></li>
-            <li><a href="#">OFFSHORE BANKING</a></li>
+    <div class="sidebar-menu" id="sidebarMenu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="Car Wash.html">Car Wash Service</a></li>
+            <li><a href="#">Marine Service</a></li>
+            <li><a href="#">HSE Policy</a></li>
+            <li><a href="#">Clients</a></li>
+            <li><a href="#">Enquiry</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact Us</a></li>
         </ul>
-
-        <div class="contact-info">
-            <h3>Contact Info</h3>
-            <p>ইসলামী ব্যাংক টাওয়ার</p>
-            <p>৪০, দিলকুশা সি/এ, ঢাকা - ১০০০</p>
-            <p>(০২) ৯৫৬৩০৪০ (Auto Hunting), ৯৫৬০099,</p>
-            <p>9567161,9567162, 9569417</p>
-            <p><a href="mailto:info@islamibankbd.com" style="color: white; text-decoration: none;">info@islamibankbd.com</a></p>
+    </div> 
+    
+    <!-- 108 থেকে ১০৭ পর্যন্ত কন্টাক্ট ইনফরমেশন-->
+      
+    </div>
+            <div class="contact-info">
+            <h2>CONTACT US</h2>
+            <p>"Feel free to contact us for any inquiries:"</p>
+            <p><strong>Phone:</strong> <a href="tel:+971 54520-9013">+971 54520-9023</a></p>
+            <p><strong>Email:</strong> <a href="mailto: smartservic24@gmail.com.com">smartservic24@gmail.com</a></p>
+            <p><strong>Address:</strong> [Al Barsha height], [Dubai], [United Arab Emirates]</p>
         </div>
     </div>
+    
 
     <script>
-        const closeIcon = document.querySelector('.close-icon');
-        const menuContainer = document.querySelector('.menu-container');
-        const dropdownLinks = document.querySelectorAll('.main-menu > li > a .dropdown-arrow');
-        const submenus = document.querySelectorAll('.submenu');
-        const backArrows = document.querySelectorAll('.submenu > li > a .back-arrow');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
 
-        closeIcon.addEventListener('click', () => {
-            menuContainer.style.display = 'none'; // অথবা অন্য কোনো স্টাইল পরিবর্তন
+        menuToggle.addEventListener('click', () => {
+            sidebarMenu.classList.toggle('open');
         });
 
-        dropdownLinks.forEach(arrow => {
-            arrow.addEventListener('click', (event) => {
-                event.preventDefault();
-                const listItem = arrow.parentNode.parentNode;
-                const submenu = listItem.querySelector('.submenu');
-                if (submenu) {
-                    submenu.classList.toggle('active');
-                }
-            });
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!sidebarMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebarMenu.classList.remove('open');
+            }
         });
-
-        backArrows.forEach(arrow => {
-            arrow.addEventListener('click', (event) => {
-                event.preventDefault();
-                arrow.parentNode.parentNode.classList.remove('active');
-            });
-        });
-
-        // প্রাথমিকভাবে মেনু দেখানো (ডেভেলপমেন্টের জন্য)
-        menuContainer.style.display = 'block'; // ফাইনাল ভার্সনে এটিকে 'none' করে দেবেন এবং মেনু আইকনে ক্লিকের মাধ্যমে দেখানোর ব্যবস্থা করবেন
     </script>
 
 </body>
